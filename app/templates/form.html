@@ -1,0 +1,10 @@
+<form action="{{ url_for('registarArchivo') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
+    <div class="custom-file">
+        <input type="file" name="archivo" class="custom-file-input" required>
+        <label class="custom-file-label" for="validatedCustomFile">Seleccionar Archivo...</label>
+      </div>
+
+    <div class="form-group mb-5 text-center mt-5">
+        <button type="submit" class="btn btn-primary btn-sm">Enviar Archivo</button>
+    </div>
+</form>

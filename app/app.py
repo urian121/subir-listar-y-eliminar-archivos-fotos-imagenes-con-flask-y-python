@@ -23,10 +23,10 @@ def stringAleatorio():
 #Creando un Decorador
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template('index.html')
+    return render_template('index.html', list_Photos = listaArchivos())
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/guardar-foto', methods=['GET', 'POST'])
 def registarArchivo():
         if request.method == 'POST':
 
@@ -41,14 +41,24 @@ def registarArchivo():
      
             upload_path = os.path.join (basepath, 'static/archivos', nuevoNombreFile) 
             file.save(upload_path)
-            
-            return '<br><br><center>El Registro fue un Exito &#x270c;&#xfe0f; </center>'
-        return render_template('index.html')
+        return render_template('index.html', list_Photos = listaArchivos())
     
 
-
+@app.route('/<string:nombreFoto>', methods=['GET', 'POST'])
+def EliminarFoto(nombreFoto=''):
+    print(nombreFoto)
+    basepath = os.path.dirname (__file__) #C:\xampp\htdocs\elmininar-archivos-con-Python-y-Flask\app
+    url_File = os.path.join (basepath, 'static/archivos', nombreFoto)
+    print(url_File)
+    os.remove(url_File) #Borrar foto desde la carpeta
+    #os.unlink(url_File) #Otra forma de borrar archivos en una carpeta
+    return render_template('index.html', list_Photos = listaArchivos())
+    
+    
+    
 def listaArchivos():
-    print(os.listdir('static/archivos'))
+    urlFiles = 'static/archivos'
+    return (os.listdir(urlFiles))
     
     
     

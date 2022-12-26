@@ -3,7 +3,6 @@ body{
     height: 100vh;
 }
 .container{
-  width: 50%;
   background-color: #fff !important;
   border-radius: 10px;
   box-shadow: 0 2.5rem 2rem -2rem hsl(200 50% 20% / 40%);
@@ -15,4 +14,18 @@ body{
 h2{
   font-weight: 800;
   line-height: 60px !important;
+}
+
+.index{
+    background-color: orange;
+    padding: 12px;
+    font-weight: bold;
+}
+.namePhone{
+  float: right;
+  color: black;
+}
+.media{
+    border-bottom: 1px solid #9999;
+    margin-bottom: 34px !important;
 }
