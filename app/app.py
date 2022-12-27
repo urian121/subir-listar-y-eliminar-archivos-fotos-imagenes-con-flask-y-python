@@ -3,7 +3,10 @@ from random import sample
 
 #Para subir archivo tipo foto al servidor
 from werkzeug.utils import secure_filename 
-import os
+#El módulo os en Python proporciona los detalles y la funcionalidad del sistema operativo.
+import os 
+from os import remove #Modulo  para remover archivo
+from os import path #Modulo para obtener la ruta o directorio
 
 
 #Declarando nombre de la aplicación e inicializando
@@ -32,14 +35,14 @@ def registarArchivo():
 
             #Script para archivo
             file     = request.files['archivo']
-            basepath = os.path.dirname (__file__) #La ruta donde se encuentra el archivo actual
+            basepath = path.dirname (__file__) #La ruta donde se encuentra el archivo actual
             filename = secure_filename(file.filename) #Nombre original del archivo
             
             #capturando extensión del archivo ejemplo: (.png, .jpg, .pdf ...etc)
-            extension           = os.path.splitext(filename)[1]
+            extension           = path.splitext(filename)[1]
             nuevoNombreFile     = stringAleatorio() + extension
      
-            upload_path = os.path.join (basepath, 'static/archivos', nuevoNombreFile) 
+            upload_path = path.join (basepath, 'static/archivos', nuevoNombreFile) 
             file.save(upload_path)
         return render_template('index.html', list_Photos = listaArchivos())
     
@@ -47,12 +50,16 @@ def registarArchivo():
 @app.route('/<string:nombreFoto>', methods=['GET', 'POST'])
 def EliminarFoto(nombreFoto=''):
     print(nombreFoto)
-    basepath = os.path.dirname (__file__) #C:\xampp\htdocs\elmininar-archivos-con-Python-y-Flask\app
-    url_File = os.path.join (basepath, 'static/archivos', nombreFoto)
+    basepath = path.dirname (__file__) #C:\xampp\htdocs\elmininar-archivos-con-Python-y-Flask\app
+    url_File = path.join (basepath, 'static/archivos', nombreFoto)
     print(url_File)
-    os.remove(url_File) #Borrar foto desde la carpeta
-    #os.unlink(url_File) #Otra forma de borrar archivos en una carpeta
-    return render_template('index.html', list_Photos = listaArchivos())
+    
+    #verifcando si existe el archivo, con la funcion (path.exists) antes de de llamar remove 
+    # para eliminarlo, con el fin de evitar un error si no existe.
+    if path.exists(url_File):
+        remove(url_File) #Borrar foto desde la carpeta
+        #os.unlink(url_File) #Otra forma de borrar archivos en una carpeta
+        return render_template('index.html', list_Photos = listaArchivos())
     
     
     
