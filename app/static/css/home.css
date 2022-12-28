@@ -8,6 +8,18 @@ body{
   box-shadow: 0 2.5rem 2rem -2rem hsl(200 50% 20% / 40%);
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
+img{
+  width: 100%;
+  width: 150px;
+ }
+ .img_mini{
+  width: 90px !important;
+ }
+ h1{
+  background-color: #f2f4f8;
+  font-size: 35px;
+  font-weight: 800;
+ }
 .negrita{
   color: black;
 }
